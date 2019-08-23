@@ -1,0 +1,50 @@
+//INICIALMENTE vamos a clonar el repositorio
+
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+
+//ahora tenes que entrar a la carpeta EDA
+cd EDA
+
+//ahora creas tu rama
+git branch mica
+
+//ahora tenes que posicionarte en tu rama (porque estas en la master)
+git checkout mica
+-------------------------------------------------------------------------------------------------------
+
+//VER SI HAY CAMBIOS DE TU PROYECTO RESPECTO AL MASTER(DEFAULT) y guardarlos, para esto debes estar dentro de la carpeta EDA
+
+git status
+
+//para subir cambios a tu rama
+
+git add -A
+
+//ahora tenes q hacer un commit
+
+git commit -a -m "aca le pones algun mensaje acerca de que son los cambios"
+
+//subis los cambios a tu rama
+
+git push origin mica
+
+-----------------------------------------------------------------------------------------------------------
+//para obtener los cambios de otra rama, tenes que estar dentro de tu rama, te podes fijar haciendo git status, ahi te muestra la rama donde estas
+
+git fetch origin
+
+//ahi te va a mostrar las ramas donde hay cambios
+git merge origin/ina
+
+//si hay comflicto, te va a mostrar los archivos donde los hay y tenes q ir al archivo y cambiarlos manualmente, van a estar comentados los cambios de tu rama y de la otra con este simbolo >>>>>>>>>>
+//entonces ahora los tenes q guardar
+git add -A
+git commit -a -m "aca le pones algun mensaje acerca de que son los cambios"
+
+//a veces te muestra que tenes que escribir un mensaje para el merge, si te lo pide haces
+
+//despues te digo porque no encuentro la hoja
+
+
+
+
