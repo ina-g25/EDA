@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1566532500 source:c:\users\inalen godoy\documents\codeblocksproyects\p1-grupo5\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"estructuras.h"
+	"lso.h"
+	"lsd.h"
+	"funciones_generales.h"
+
+1566529635 c:\users\inalen godoy\documents\codeblocksproyects\p1-grupo5\estructuras.h
+	<stdio.h>
+
+1566528080 c:\users\inalen godoy\documents\codeblocksproyects\p1-grupo5\lso.h
+
+1566534376 c:\users\inalen godoy\documents\codeblocksproyects\p1-grupo5\lsd.h
+
+1566533172 c:\users\inalen godoy\documents\codeblocksproyects\p1-grupo5\funciones_generales.h
+
