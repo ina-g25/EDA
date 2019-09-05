@@ -1,6 +1,11 @@
+//una vez instalado git 
 //INICIALMENTE vamos a clonar el repositorio
 
-git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+git clone https://github.com/ina-g25/EDA.git
+
+//puede que te pida ingresar tu correo y contraseña de github
+
+
 
 //ahora tenes que entrar a la carpeta EDA
 cd EDA
