@@ -21,7 +21,7 @@ int main()
     while (1) {
         inicializar(&L);
         do {
-            printf("\n>>>>>>>PRESTAMOS CAYETANO - GESTI%cN DE CLIENTES >>>>>>>>\n",224);
+            printf("\n>>>>>>>>>>>>>>>> PRESTAMOS CAYETANO - GESTI%cN DE CLIENTES >>>>>>>>>>>>>>>>\n",224);
             printf("__________________________________________________________________________ \n");
             printf("\n\n\tBIENVENIDO!\n\n\tELIJA UNA OPCI%cN:\n\n\t1) Lista Secuencial Desordenada.\n\n\t2) Lista Secuencial Ordenada.\n\n\t3) Salir.\n\n\t>> ",224);
             scanf("%d", &opcion);
@@ -78,7 +78,7 @@ int main()
                            AltaLso(&L,aux,&exito);
 
                         if (exito) printf("\n\t>>Cliente ingresado exitosamente\n");
-                        else printf("\n\t>>No se pudo ingresar el nuevo cliente, ya pertenece a la lista\n");
+                        else printf("\n\n\t>>No se pudo ingresar el nuevo cliente, ya pertenece a la lista\n");
                     }
                     else
                         printf("\n\t>>tESPACIO INSUFICIENTE");
@@ -88,6 +88,7 @@ int main()
                 case 2: //BAJA
                     if (!listaVacia(L)) {
                         do {
+
                             printf("\n\tINGRESE EL DNI: ");
                             n = scanf("%10[^\n]", dni);
                             getchar();
@@ -184,7 +185,12 @@ int main()
                         printf("\n\t>>LA LISTA ESTA VAC%cA\n",214);
                     break;
             }
-          //  system ("cls");//limpiar pantalla
+            if(op!=7){
+                 printf("\n\tPRESIONE UNA TECLA PARA CONTINUAR >> ",181);
+                getchar();
+            }
+          system ("cls");//limpiar pantalla
+
         } while (op != 7);
 
     }

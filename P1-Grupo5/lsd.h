@@ -76,7 +76,7 @@ int LocalizarLsd(lista *L, char dni[], int *exito) {
 Cliente EvocarLsd(lista *L, char dni[], int *exito) {
     int pos;
     pos = LocalizarLsd(L, dni, exito);
-    if (exito)
+    if (*exito==1)
         return L->clientes[pos];
 }
 
