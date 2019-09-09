@@ -19,7 +19,7 @@ int validar(int tipoDato, char dato[]) {
 
     switch (tipoDato) {
         case 1:
-        {//validar dni
+        {///validar dni
             if (strlen(dato) < 7 || strlen(dato) > 8)
                 return 1;
             else {
@@ -33,7 +33,7 @@ int validar(int tipoDato, char dato[]) {
             break;
         }
         case 2:
-        {//validar telefono
+        {///validar telefono
             if (strlen(dato) < 11 || strlen(dato) > 12)
                 return 1;
             else {
@@ -46,7 +46,20 @@ int validar(int tipoDato, char dato[]) {
             }
             break;
         }
-
+        case 3:
+        {///validar monto
+            if (strlen(dato) <= 0)
+                return 1;
+            else {
+                for (i = 0; i < (strlen(dato)); i++) {
+                    if (!isdigit(dato[i])) {
+                        return 1;
+                        break;
+                    }
+                }
+            }
+            break;
+        }
     }
     return 0;
 }
@@ -79,7 +92,7 @@ Cliente CargarDatos() {
         printf("\n\tTEL%cFONO: ",144);
         n = scanf("%14[^\n]", C.telefono);
         getchar();
-        if (!n || validar(2, C.telefono))
+        if (!n || validar(2, C.telefono)) ///no deberia aceptar 0000000
             printf("\n\tAtenci%cn el tel%cfono no es v%clido, debe contener al menos 11 caracteres y no m%cs de 12.\n",162,130,160,160);
         else break;
     } while (1);
@@ -97,7 +110,7 @@ Cliente CargarDatos() {
         printf("\n\tMONTO: ");
         n = scanf("%f", &C.monto);
         getchar();
-        if (!n || C.monto <= 0)
+        if (!n || validar(3, C.monto))
             printf("\n\tAtenci%cn: debe ser un n%cmero mayor a cero.\n",162,163);
         else break;
     } while (1);
@@ -112,7 +125,7 @@ Cliente CargarDatos() {
     } while (1);
 
     do {
-        printf("\n\tFECHA DE ADJUDICACI%cN: ",224);//falta validar
+        printf("\n\tFECHA DE ADJUDICACI%cN: ",224);///falta validar
         n = scanf("%12[^\n]", C.fecha);
         getchar();
         if (!n)
@@ -181,7 +194,7 @@ void MemorizacionPrevia(lista *L, int opcion, int *exito) {
                 }
 
             } else {
-                *exito = 2; //lista llena
+                *exito = 2; ///lista llena
             }
             if(*exito==0)
                  printf("\n\t\tDni: %s\n",(cliente.dni));
@@ -189,7 +202,7 @@ void MemorizacionPrevia(lista *L, int opcion, int *exito) {
         printf("\n\n\t\t>>Lectura finalizada.\n\n");
         fclose(fp);
         if (*exito != 2)
-            *exito = 1; //memorización exitosa
+            *exito = 1; ///memorización exitosa
     }
 
 }

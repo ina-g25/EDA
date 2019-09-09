@@ -39,13 +39,13 @@ int main()
                 printf("\n>>>>>>>>>>>>>>>>>>>>>>> LISTA SECUENCIAL ORDENADA >>>>>>>>>>>>>>>>>>>>>>>> \n");
             printf("__________________________________________________________________________ \n");
             printf("\n\n\tELIJA UNA OPCI%cN:\n",224);
-            printf("\n\t1) Ingresar cliente\n\n"); //ALTA
-            printf("\t2) Eliminar cliente\n\n"); //BAJA
-            printf("\t3) Buscar y mostrar cliente por DNI\n\n"); //EVOCAR
-            printf("\t4) Pertenencia de cliente\n\n"); //PERTENECE
-            printf("\t5) Ingresar archivo de texto\n\n"); //MEMORIZACION
-            printf("\t6) Mostrar todo\n\n"); //MOSTRAR TODA LA LISTA
-            printf("\t7) Volver\n\n\t>> "); //VUELVE AL MENU PRINCIPAL
+            printf("\n\t1) Ingresar cliente\n\n"); ///ALTA
+            printf("\t2) Eliminar cliente\n\n"); ///BAJA
+            printf("\t3) Buscar y mostrar cliente por DNI\n\n"); ///EVOCAR
+            printf("\t4) Pertenencia de cliente\n\n"); ///PERTENECE
+            printf("\t5) Ingresar archivo de texto\n\n"); ///MEMORIZACION
+            printf("\t6) Mostrar todo\n\n"); ///MOSTRAR TODA LA LISTA
+            printf("\t7) Volver\n\n\t>> "); ///VUELVE AL MENU PRINCIPAL
 
             do {
 
@@ -59,7 +59,7 @@ int main()
 
             } while (op < 0 || op > 7);
 
-            system ("cls");//limpiar pantalla
+            system ("cls");///limpiar pantalla
 
             if (opcion == 1)
                 printf("\n>>>>>>>>>>>>>>>>>>>>>> LISTA SECUENCIAL DESORDENADA >>>>>>>>>>>>>>>>>>>>>> \n");
