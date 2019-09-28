@@ -17,3 +17,39 @@
 
 1566533172 c:\users\inalen godoy\documents\codeblocksproyects\p1-grupo5\funciones_generales.h
 
+1566590065 source:c:\users\inalen godoy\documents\codeblocksproyects\eda\p1-grupo5\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"estructuras.h"
+	"lso.h"
+	"lsd.h"
+	"funciones_generales.h"
+
+1566590065 c:\users\inalen godoy\documents\codeblocksproyects\eda\p1-grupo5\estructuras.h
+	<stdio.h>
+
+1567708924 c:\users\inalen godoy\documents\codeblocksproyects\eda\p1-grupo5\lso.h
+
+1567708940 c:\users\inalen godoy\documents\codeblocksproyects\eda\p1-grupo5\lsd.h
+
+1566590065 c:\users\inalen godoy\documents\codeblocksproyects\eda\p1-grupo5\funciones_generales.h
+
+1567730222 source:c:\users\micaela\documents\facultad\2019\eda\practicos\eda\p1-grupo5\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"estructuras.h"
+	"lso.h"
+	"lsd.h"
+	"funciones_generales.h"
+
+1566597203 c:\users\micaela\documents\facultad\2019\eda\practicos\eda\p1-grupo5\estructuras.h
+	<stdio.h>
+
+1567727099 c:\users\micaela\documents\facultad\2019\eda\practicos\eda\p1-grupo5\lso.h
+
+1567727099 c:\users\micaela\documents\facultad\2019\eda\practicos\eda\p1-grupo5\lsd.h
+
+1567953212 c:\users\micaela\documents\facultad\2019\eda\practicos\eda\p1-grupo5\funciones_generales.h
+
