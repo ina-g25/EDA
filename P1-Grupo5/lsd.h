@@ -50,7 +50,7 @@ void BajaLsd(lista *L, char dni[], int *exito) {
                 L->clientes[pos].monto = L->clientes[L->ult].monto;
                 L->clientes[pos].tazaInteres = L->clientes[L->ult].tazaInteres;
             }
-            L->ult--;//si es el ultimo elemento en la lista
+            L->ult--;//si es el ultimo elemento en la lista solo se decrementa el ultimo
         }
         else
             *exito=2;//si no lo desea eliminar

@@ -7,7 +7,7 @@
 #include "funciones_generales.h"
 /*
 PRACTICO DE MÁQUINA N°1
-GRUPO ..
+GRUPO 5
 Godoy Inalen
 Korec Micaela
 
@@ -41,7 +41,7 @@ int main()
             printf("\n\n\tELIJA UNA OPCI%cN:\n",224);
             printf("\n\t1) Ingresar cliente\n\n"); ///ALTA
             printf("\t2) Eliminar cliente\n\n"); ///BAJA
-            printf("\t3) Buscar y mostrar cliente por DNI\n\n"); ///EVOCAR
+            printf("\t3) Consultar informaci%cn de un cliente\n\n",162); ///EVOCAR
             printf("\t4) Pertenencia de cliente\n\n"); ///PERTENECE
             printf("\t5) Ingresar archivo de texto\n\n"); ///MEMORIZACION
             printf("\t6) Mostrar todo\n\n"); ///MOSTRAR TODA LA LISTA

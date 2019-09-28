@@ -110,7 +110,7 @@ Cliente CargarDatos() {
         printf("\n\tMONTO: ");
         n = scanf("%f", &C.monto);
         getchar();
-        if (!n || validar(3, C.monto))
+        if (!n || C.monto<=0)
             printf("\n\tAtenci%cn: debe ser un n%cmero mayor a cero.\n",162,163);
         else break;
     } while (1);
@@ -125,7 +125,7 @@ Cliente CargarDatos() {
     } while (1);
 
     do {
-        printf("\n\tFECHA DE ADJUDICACI%cN: ",224);///falta validar
+        printf("\n\tFECHA DE ADJUDICACI%cN: ",224);
         n = scanf("%12[^\n]", C.fecha);
         getchar();
         if (!n)
@@ -194,9 +194,9 @@ void MemorizacionPrevia(lista *L, int opcion, int *exito) {
                 }
 
             } else {
-                *exito = 2; ///lista llena
+                *exito = 2; ///si la lista está llena
             }
-            if(*exito==0)
+            if(*exito==0)//si no se le pudo dar alta, significa que esta repetido en la lista
                  printf("\n\t\tDni: %s\n",(cliente.dni));
         }
         printf("\n\n\t\t>>Lectura finalizada.\n\n");

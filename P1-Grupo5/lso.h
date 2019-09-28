@@ -13,8 +13,6 @@ void AltaLso(lista *L, Cliente C, int *exito) {
             L->clientes[i].monto = L->clientes[i - 1].monto;
             L->clientes[i].tazaInteres = L->clientes[i - 1].tazaInteres;
         }
-        L->ult++;
-        *exito = 1;
         //ingreso el nuevo cliente
         strcpy(L->clientes[pos].dni, C.dni);
         strcpy(L->clientes[pos].nombre, C.nombre);
@@ -23,6 +21,7 @@ void AltaLso(lista *L, Cliente C, int *exito) {
         strcpy(L->clientes[pos].fecha, C.fecha);
         L->clientes[pos].monto = C.monto;
         L->clientes[pos].tazaInteres = C.tazaInteres;
+        L->ult++;
         *exito = 1;
     } else
         *exito = 0;
@@ -66,7 +65,7 @@ void BajaLso(lista *L, char dni[], int *exito) {
             *exito=2;//si no desea eliminar
     }
     else
-        *exito = 0;//si no lo encontro
+        *exito = 0;//si no encontro el elemento
 }
 
 int LocalizarLso(lista *L, char dni[], int *exito) {
