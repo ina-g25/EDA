@@ -1,1 +1,22 @@
 # depslib dependency file v1.0
+1569735668 source:c:\users\inalen godoy\documents\codeblocksproyects\eda\p2-grupo5\main.c
+	<stdio.h>
+	<math.h>
+	<string.h>
+	"estructuras.h"
+	"lso.h"
+	"LSOBB.h"
+	"lsd.h"
+	"funciones_generales.h"
+
+1569735172 c:\users\inalen godoy\documents\codeblocksproyects\eda\p2-grupo5\estructuras.h
+	<stdio.h>
+
+1569733405 c:\users\inalen godoy\documents\codeblocksproyects\eda\p2-grupo5\lso.h
+
+1569733418 c:\users\inalen godoy\documents\codeblocksproyects\eda\p2-grupo5\lsd.h
+
+1569733417 c:\users\inalen godoy\documents\codeblocksproyects\eda\p2-grupo5\funciones_generales.h
+
+1569733352 c:\users\inalen godoy\documents\codeblocksproyects\eda\p2-grupo5\lsobb.h
+

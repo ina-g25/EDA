@@ -1,4 +1,25 @@
-void AltaLso(lista *L, Cliente C, int *exito) {
+
+int LocalizarLso(lista *L, char dni[], int *exito, int *costo) {
+    int pos = 0, dni1, dni2;
+    *exito = 0;
+    dni2 = atoi(dni);
+
+    while (L->ult >= pos) {
+        dni1 = atoi(L->clientes[pos].dni);
+        *costo = (*costo)+1;
+        if (dni1 < dni2) {
+            pos++;
+        } else {
+            break;
+        }
+    }
+    if (L->ult >= pos) {
+        if (dni1 == dni2)
+            *exito = 1;
+    }
+    return pos;
+}
+int AltaLso(lista *L, Cliente C, int *exito) {
 
     int pos, i,costo;
     pos = LocalizarLso(L, C.dni, exito, &costo);
@@ -30,29 +51,33 @@ void AltaLso(lista *L, Cliente C, int *exito) {
     return costo;
 }
 
-void BajaLso(lista *L, char dni[], int *exito) {
+int BajaLso(lista *L, char dni[], int *exito) {
 
-    int pos, i, j,costo;
+    int pos, i,costo;
     pos = LocalizarLso(L, dni, exito, &costo);
     costo = 0;
     if (*exito == 1) {
+        if (CompararEstruct == 0) {///si eligio la opcion de administrar estructuras del menu
+            printf("\n\t\t<<Informaci%cn Personal>>\n",162);
+            mostrar(L->clientes[pos]);
 
-        printf("\n\t\t<<Informaci%cn Personal>>\n",162);
-        mostrar(L->clientes[pos]);
-
-        do {
-            printf("\n\t¿Desea eliminar el cliente?. Elija una opci%cn\n",162);
-            printf("\n\t1)Eliminar\n\t2)Salir\n\t>> ");
-            scanf("%d", &i);
-            getchar();
-            if (i < 1 || i > 2) {
-                printf("\n\tERROR REINGRESE CANTIDAD V%cLIDA >> ",181);
+            do {
+                printf("\n\t¿Desea eliminar el cliente?. Elija una opci%cn\n",162);
+                printf("\n\t1)Eliminar\n\t2)Salir\n\t>> ");
                 scanf("%d", &i);
                 getchar();
-            }
-        } while (i < 1 || i > 2);
+                if (i < 1 || i > 2) {
+                    printf("\n\tERROR REINGRESE CANTIDAD V%cLIDA >> ",181);
+                    scanf("%d", &i);
+                    getchar();
+                }
+            } while (i < 1 || i > 2);
+        }
+        else{
+            i=comparacion(BajaCliente,L->clientes[pos]);
+        }
 
-        if (i == 1) {//si desea borrar
+        if (i == 1) {///si desea eliminar
             for (i = pos; i < L->ult; i++) {
                 strcpy(L->clientes[i].dni, L->clientes[i + 1].dni);
                 strcpy(L->clientes[i].nombre, L->clientes[i + 1].nombre);
@@ -68,32 +93,9 @@ void BajaLso(lista *L, char dni[], int *exito) {
          else
             *exito=2;///si no desea eliminar
     }
-    else
-        *exito = 0;///si no encontro el elemento
-        return costo;
+    return costo;
 }
 
-int LocalizarLso(lista *L, char dni[], int *exito, int *costo) {
- int pos = 0, dni1, dni2;
-  *exito = 0;
-    *exito = 0;
-    dni2 = atoi(dni);
-
-    while (L->ult >= pos) {
-        dni1 = atoi(L->clientes[pos].dni);
-        *costo = (*costo)+1;
-        if (dni1 < dni2) {
-            pos++;
-        } else {
-            break;
-        }
-    }
-    if (L->ult >= pos) {
-        if (dni1 == dni2)
-            *exito = 1;
-    }
-    return pos;
-}
 
 Cliente EvocarLso(lista *L, char dni[], int *exito, int *costo) {
     int pos;

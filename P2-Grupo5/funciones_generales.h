@@ -1,18 +1,3 @@
-int listaLlena(lista L) {
-    if (L.ult >= MAX)
-        return 1;
-    else return 0;
-}
-
-int listaVacia(lista L) {
-    if (L.ult == -1)
-        return 1;
-    else return 0;
-}
-
-void inicializar(lista *L){
-    (*L).ult=-1;
-}
 
 int validar(int tipoDato, char dato[]) {
     int i;
@@ -153,56 +138,277 @@ void mostrarLista(lista *L) {
         mostrar(L->clientes[i]);
     }
 }
+int comparacion(Cliente C1, Cliente C2) {
+    int exito = 0;
 
+    if ((strcmp(C1.dni, C2.dni)) == 0) {
+
+        if ((strcmp(C1.nombre, C2.nombre)) == 0) {
+
+            if ((strcmp(C1.prestamo, C2.prestamo)) == 0) {
+
+                if ((strcmp(C1.telefono, C2.telefono)) == 0) {
+
+                    if ((strcmp(C1.fecha, C2.fecha)) == 0) {
+
+                        if (C1.tazaInteres == C2.tazaInteres) {
+
+                            if (C1.monto == C2.monto) {
+                                exito = 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return exito;
+
+}
 void MemorizacionPrevia(lista *L, int opcion, int *exito) {
     FILE *fp;
     Cliente cliente;
-    char basura[4];
+
     if ((fp = fopen("ClientesPrestamos.txt", "r")) == NULL) {
         *exito = 0;
     } else {
-        printf("\n\tClientes repetidos encontrados en el archivo:\n");
         while (!(feof(fp))) {
+            if(fscanf(fp, " %[^\n]", cliente.dni) == 1){//si se pudo leer fscanf retorna el valor 1
 
-            fgets(basura, 1, fp);
-            fscanf(fp, "%[^\n]", cliente.dni);
-            fgets(basura, 2, fp);
+                 fscanf(fp, " %[^\n]", cliente.prestamo);
+                 fscanf(fp, "%f", &(cliente.tazaInteres));
+                 fscanf(fp, " %[^\n]", cliente.nombre);
+                 fscanf(fp, " %[^\n]", cliente.telefono);
+                 fscanf(fp, "%f", &(cliente.monto));
+                 fscanf(fp, " %[^\n]", cliente.fecha);
+                if (L->ult < (MAX-1)){///si la lista no esta llena
+                    if (opcion == 1) {
+                        AltaLsd(L, cliente, exito);
+                    }
+                    else{
+                        AltaLso(L, cliente, exito);
+                    }
 
-            fscanf(fp, "%[^\n]", cliente.prestamo);
-            fgets(basura, 2, fp);
-
-            fscanf(fp, "%f", &(cliente.tazaInteres));
-            fgets(basura, 2, fp);
-            fscanf(fp, "%[^\n]", cliente.nombre);
-            fgets(basura, 2, fp);
-
-            fscanf(fp, "%[^\n]", cliente.telefono);
-            fgets(basura, 2, fp);
-
-            fscanf(fp, "%f", &(cliente.monto));
-            fgets(basura, 2, fp);
-            fscanf(fp, "%[^\n]", cliente.fecha);
-            fgets(basura, 2, fp);
-
-
-            if (!listaLlena(*L)) {
-                if (opcion == 1) {
-                    AltaLsd(L, cliente, exito);
-                }
-                else{
-                    AltaLso(L, cliente, exito);
+                } else {
+                    *exito = 2; ///si la lista está llena
                 }
 
-            } else {
-                *exito = 2; ///si la lista está llena
             }
-            if(*exito==0)//si no se le pudo dar alta, significa que esta repetido en la lista
-                 printf("\n\t\tDni: %s\n",(cliente.dni));
         }
         printf("\n\n\t\t>>Lectura finalizada.\n\n");
         fclose(fp);
         if (*exito != 2)
             *exito = 1; ///memorización exitosa
+    }
+
+}
+
+
+void LecturaArchivoOperaciones(lista *LSD, lista *LSO, lista *LSOBB) {
+
+    int ContBajaLsd = 0, ContBajaLso = 0, ContBajaLsobb = 0;
+    int ContAltaLsd = 0, ContAltaLso = 0, ContAltaLsobb = 0;
+    int ContEvocarLsdE = 0, ContEvocarLsoE = 0, ContEvocarLsobbE = 0;
+    int ContEvocarLsdF = 0, ContEvocarLsoF = 0, ContEvocarLsobbF = 0;
+
+    int MaxAltaLsd = 0, MaxBajaLsd = 0, MaxEvocarLsdE = 0, MaxEvocarLsdF = 0;
+    int MaxAltaLso = 0, MaxBajaLso = 0, MaxEvocarLsoE = 0, MaxEvocarLsoF = 0;
+    int MaxAltaLsobb = 0, MaxBajaLsobb = 0, MaxEvocarLsobbE = 0, MaxEvocarLsobbF = 0;
+
+    int ExitoAltaLsd = 0, ExitoBajaLsd = 0, ExitoEvocarLsd = 0, FracasoEvocarLsd = 0;
+    int ExitoAltaLso = 0, ExitoBajaLso = 0, ExitoEvocarLso = 0, FracasoEvocarLso = 0;
+    int ExitoAltaLsobb = 0, ExitoBajaLsobb = 0, ExitoEvocarLsobb = 0, FracasoEvocarLsobb = 0;
+
+    int CostoEvocar, valor = 0;
+    int CodOp;
+    int exito;
+    FILE *fp;
+    Cliente cliente;
+    CompararEstruct = 1;
+
+
+    if ((fp = fopen("Operaciones.txt", "r")) == NULL)
+        printf("No se pudo abrir el archivo");
+    else {
+
+        while (!(feof(fp))) {
+            CodOp=0;
+            if(fscanf(fp, "%d", &CodOp) == 1){//si se pudo leer fscanf retorna el valor 1
+
+                if ((CodOp == 1) || (CodOp == 2)) {///si la operacion es de alta o baja
+                     fscanf(fp, " %[^\n]", cliente.dni);
+                     fscanf(fp, " %[^\n]", cliente.prestamo);
+                     fscanf(fp, "%f", &(cliente.tazaInteres));
+                     fscanf(fp, " %[^\n]", cliente.nombre);
+                     fscanf(fp, " %[^\n]", cliente.telefono);
+                     fscanf(fp, "%f", &(cliente.monto));
+                     fscanf(fp, " %[^\n]", cliente.fecha);
+                } else {
+                    if (CodOp == 3) {
+                        fscanf(fp, " %[^\n]", cliente.dni);
+                    }
+                }
+
+
+                if (validar(1, cliente.dni) == 0) {
+                    switch (CodOp) {
+                        case 1:
+                            ///LSD
+                            valor=0;
+                            valor = AltaLsd(LSD, cliente,&exito);
+                            ContAltaLsd += valor; ///CONTADOR CORRIMIENTOS
+                            if (exito==1)
+                                ExitoAltaLsd++; /// CONTADOR EXITOS
+                            if (valor > MaxAltaLsd)
+                                MaxAltaLsd = valor; ///COSTO MAXIMO
+
+                            ///LSO
+                            valor=0;
+                            valor = AltaLso(LSO, cliente,&exito);
+                            ContAltaLso += valor;
+                            if (exito==1)
+                                ExitoAltaLso++;
+                            if (valor > MaxAltaLso)
+                                MaxAltaLso = valor;
+
+                            ///LSOBB
+                            valor=0;
+                            valor = AltaLsobb(LSOBB, cliente,&exito);
+                            ContAltaLsobb += valor;
+                            if (exito==1)
+                                ExitoAltaLsobb++;
+                            if (valor > MaxAltaLsobb)
+                                MaxAltaLsobb = valor;
+
+                            break;
+
+                        case 2:
+                            strcpy(BajaCliente.dni, cliente.dni);
+                            strcpy(BajaCliente.nombre, cliente.nombre);
+                            strcpy(BajaCliente.telefono, cliente.telefono);
+                            strcpy(BajaCliente.prestamo, cliente.prestamo);
+                            strcpy(BajaCliente.fecha, cliente.fecha);
+                            BajaCliente.monto = cliente.monto;
+                            BajaCliente.tazaInteres = cliente.tazaInteres;
+
+
+                            ///LSD
+                            valor=0;
+                            valor = BajaLsd(LSD, cliente.dni, &exito);
+                            ContBajaLsd += valor;
+                            if (exito==1)
+                                ExitoBajaLsd++;
+                            if (valor > MaxBajaLsd)
+                                MaxBajaLsd = valor;
+
+                            ///LSO
+                            valor=0;
+                            valor = BajaLso(LSO, cliente.dni, &exito);
+                            ContBajaLso += valor;
+                            if (exito==1)
+                                ExitoBajaLso++;
+                            if (valor > MaxBajaLso)
+                                MaxBajaLso = valor;
+
+                            ///LSOBB
+                            valor=0;
+                            valor = BajaLsobb(LSOBB, cliente.dni, &exito);
+                            ContBajaLsobb += valor;
+                            if (exito==1)
+                                ExitoBajaLsobb++;
+                            if (valor > MaxBajaLsobb)
+                                MaxBajaLsobb = valor;
+                            break;
+                        case 3:
+                            ///LSD
+                            CostoEvocar=0;
+                            EvocarLsd(LSD, cliente.dni, &exito, &CostoEvocar);
+
+                            if (exito==1) {
+                                ContEvocarLsdE += CostoEvocar; //ACUMULADOR CELDAS CONSULTADAS
+                                ExitoEvocarLsd++; //CONTADOR EXITOS
+                                if (CostoEvocar > MaxEvocarLsdE)//MAXIMO
+                                    MaxEvocarLsdE = CostoEvocar;
+                            } else {
+                                ContEvocarLsdF += CostoEvocar;
+                                FracasoEvocarLsd++;
+                                if (CostoEvocar > MaxEvocarLsdF)
+                                    MaxEvocarLsdF = CostoEvocar;
+                            }
+
+                            ///LSO
+                            CostoEvocar=0;
+                            EvocarLso(LSO, cliente.dni, &exito, &CostoEvocar);
+                            if (exito==1) {
+                                ContEvocarLsoE += CostoEvocar; //ACUMULADOR CELDAS CONSULTADAS
+                                ExitoEvocarLso++; //CONTADOR EXITOS
+                                if (CostoEvocar > MaxEvocarLsoE)//MAXIMO
+                                    MaxEvocarLsoE = CostoEvocar;
+                            } else {
+                                ContEvocarLsoF += CostoEvocar;
+                                FracasoEvocarLso++;
+                                if (CostoEvocar > MaxEvocarLsoF)
+                                    MaxEvocarLsoF = CostoEvocar;
+                            }
+                            ///LSOBB
+                            CostoEvocar=0;
+                            EvocarLsobb(LSOBB, cliente.dni, &exito, &CostoEvocar);
+                            if (exito==1) {
+                                ContEvocarLsobbE += CostoEvocar; //ACUMULADOR CELDAS CONSULTADAS
+                                ExitoEvocarLsobb++; //CONTADOR EXITOS
+                                if (CostoEvocar > MaxEvocarLsobbE)//MAXIMO
+                                    MaxEvocarLsobbE = CostoEvocar;
+                            } else {
+                                ContEvocarLsobbF += CostoEvocar;
+                                FracasoEvocarLsobb++;
+                                if (CostoEvocar > MaxEvocarLsobbF)
+                                    MaxEvocarLsobbF = CostoEvocar;
+                            }
+                            break;
+
+                    }
+                }
+
+            }
+        }
+        fclose(fp);
+
+        printf("\n************************* COMPARACION DE ESTRUCTURAS ***************************\n");
+
+
+        printf("\n________________________________________________________________________________\n");
+        printf("\n Estructuras\t\tPeor Escenario\t\t Comportamiento esperado\t\t\n\n");
+
+        printf("\n________________________________________________________________________________\n");
+        printf(" Alta LSD\t\t\t%d\t\t\t%.3f\t\n", MaxAltaLsd, ((float)ContAltaLsd / (float) ExitoAltaLsd));
+        printf(" Alta LSO\t\t\t%d\t\t\t%.3f\t\n", MaxAltaLso, (float)ContAltaLso / (float) ExitoAltaLso);
+        printf(" Alta LSOBB\t\t\t%d\t\t\t%.3f\t\n", MaxAltaLsobb, (float)ContAltaLsobb / (float) ExitoAltaLsobb);
+        printf("\n________________________________________________________________________________\n");
+        printf(" BAJA LSD\t\t\t%d\t\t\t%.3f\t\n", MaxBajaLsd, (float)ContBajaLsd / (float) ExitoBajaLsd);
+        printf(" BAJA LSO\t\t\t%d\t\t\t%.3f\t\n", MaxBajaLso, (float)ContBajaLso / (float) ExitoBajaLso);
+        printf(" BAJA LSOBB\t\t\t%d\t\t\t%.3f\t\n", MaxBajaLsobb, (float)ContBajaLsobb / (float) ExitoBajaLsobb);
+        printf("\n________________________________________________________________________________\n");
+        printf(" EVOCAR Exitoso LSD\t\t%d\t\t\t%.3f\t\n", MaxEvocarLsdE, (float)ContEvocarLsdE / (float) ExitoEvocarLsd);
+        printf(" EVOCAR Exitoso LSO\t\t%d\t\t\t%.3f\t\n", MaxEvocarLsoE, (float)ContEvocarLsoE / (float) ExitoEvocarLso);
+        printf(" EVOCAR Exitoso LSOBB\t\t%d\t\t\t%.3f\t\n", MaxEvocarLsobbE, (float)ContEvocarLsobbE / (float) ExitoEvocarLsobb);
+        printf("\n________________________________________________________________________________\n");
+        printf(" EVOCAR No Exitoso LSD\t\t%d\t\t\t%.3f\t\n", MaxEvocarLsdF, (float)ContEvocarLsdF / (float) FracasoEvocarLsd);
+        printf(" EVOCAR No Exitoso LSO\t\t%d\t\t\t%.3f\t\n", MaxEvocarLsoF, (float)ContEvocarLsoF / (float) FracasoEvocarLso);
+        printf(" EVOCAR No Exitoso LSOBB\t%d\t\t\t%.3f\t\n", MaxEvocarLsobbF, (float)ContEvocarLsobbF / (float) FracasoEvocarLsobb);
+        printf("\n________________________________________________________________________________\n");
+         printf("\n________________________________________________________________________________\n");
+        printf("LSD\nCantidad de Altas exitosas: %d\nCantidad de Bajas exitosas: %d\n", ExitoAltaLsd, ExitoBajaLsd);
+        printf("Cantidad de Evocaciones Exitosas: %d\n", ExitoEvocarLsd);
+        printf("Cantidad de Evocaciones Fracaso: %d\n", FracasoEvocarLsd);
+        printf("\n________________________________________________________________________________\n");
+        printf("LSO\nCantidad de Altas exitosas: %d\nCantidad de Bajas exitosas: %d\n", ExitoAltaLso, ExitoBajaLso);
+        printf("Cantidad de Evocaciones Exitosas: %d\n", ExitoEvocarLso);
+        printf("Cantidad de Evocaciones Fracaso: %d\n", FracasoEvocarLso);
+       printf("\n________________________________________________________________________________\n");
+        printf("LSD\nCantidad de Altas exitosas: %d\nCantidad de Bajas exitosas: %d\n", ExitoAltaLsobb, ExitoBajaLsobb);
+        printf("Cantidad de Evocaciones Exitosas: %d\n", ExitoEvocarLsobb);
+        printf("Cantidad de Evocaciones Fracaso: %d\n", FracasoEvocarLsobb);
+
     }
 
 }

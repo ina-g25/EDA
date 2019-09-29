@@ -16,6 +16,12 @@ typedef struct {
     Cliente clientes [MAX];
 } lista;
 
-lista L;
+lista *L;
+lista LSD;
+lista LSO;
+lista LSOBB;
+
+int CompararEstruct=0;
+Cliente BajaCliente;
 
 

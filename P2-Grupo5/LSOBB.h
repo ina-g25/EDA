@@ -38,44 +38,46 @@ int LocalizarLsobb(lista *L, char dni[], int *exito, int *costo) {
     return t;
 }
 
-int AltaLsobb(lista *L, int *exito, Beneficiario D) {
+int AltaLsobb(lista *L, Cliente C, int *exito) {
     int pos, i, costo;
 
-    pos = LocalizarLsobb(L, D.dni, exito, &costo);
+    pos = LocalizarLsobb(L, C.dni, exito, &costo);
     costo = 0;
     if (*exito == 0) {
 
         for (i = (L->ult + 1); i >= pos + 1; i--) {
             costo++;
-            strcpy(L->beneficiarios[i ].dni, L->beneficiarios[i - 1].dni);
-            strcpy(L->beneficiarios[i ].nombre, L->beneficiarios[i - 1].nombre);
-            strcpy(L->beneficiarios[i ].telefono, L->beneficiarios[i - 1].telefono);
-            strcpy(L->beneficiarios[i ].grupo, L->beneficiarios[i - 1].grupo);
-            L->beneficiarios[i].anio = L->beneficiarios[i - 1].anio;
-            L->beneficiarios[i].importe = L->beneficiarios[i - 1].importe;
+            strcpy(L->clientes[i ].dni, L->clientes[i - 1].dni);
+            strcpy(L->clientes[i ].nombre, L->clientes[i - 1].nombre);
+            strcpy(L->clientes[i ].telefono, L->clientes[i - 1].telefono);
+            strcpy(L->clientes[i ].prestamo, L->clientes[i - 1].prestamo);
+            strcpy(L->clientes[i ].fecha, L->clientes[i - 1].fecha);
+            L->clientes[i].monto = L->clientes[i - 1].monto;
+            L->clientes[i].tazaInteres = L->clientes[i - 1].tazaInteres;
         }
         L->ult++;
         *exito = 1;
-        strcpy(L->beneficiarios[pos].dni, D.dni);
-        strcpy(L->beneficiarios[pos].nombre, D.nombre);
-        strcpy(L->beneficiarios[pos].telefono, D.telefono);
-        strcpy(L->beneficiarios[pos].grupo, D.grupo);
-        L->beneficiarios[pos].importe = D.importe;
-        L->beneficiarios[pos].anio = D.anio;
-        *exito = 1;
+        ///ingreso el nuevo cliente
+        strcpy(L->clientes[pos].dni, C.dni);
+        strcpy(L->clientes[pos].nombre, C.nombre);
+        strcpy(L->clientes[pos].telefono, C.telefono);
+        strcpy(L->clientes[pos].prestamo, C.prestamo);
+        strcpy(L->clientes[pos].fecha, C.fecha);
+        L->clientes[pos].monto = C.monto;
+        L->clientes[pos].tazaInteres = C.tazaInteres;
     } else
         *exito = 0;
     return costo;
 }
 
 int BajaLsobb(lista *L, char dni[], int *exito) {
-    int pos, i, j, costo;
+    int pos, i, costo;
     pos = LocalizarLsobb(L, dni, exito, &costo);
     costo = 0;
     if (*exito == 1) {
-        if (BajaAdminCostos == 0) {
+        if (CompararEstruct == 0) {///si eligio la opcion de administrar estructuras del menu
             printf("\n\t\t\t<<Informaci%cn Personal>>\n",162);
-            mostrar(L->beneficiarios[pos]);
+            mostrar(L->clientes[pos]);
             do {
                 printf("\n\tIngrese 1 si desea borrar\n\tIngrese 2 para Salir\n\t>> ");
                 scanf("%d", &i);
@@ -87,35 +89,35 @@ int BajaLsobb(lista *L, char dni[], int *exito) {
                 }
             } while (i < 1 || i > 2);
         } else {
-            i = comparacion(BajaAdminBeneficiario, L->beneficiarios[pos]);
+            i = comparacion(BajaCliente, L->clientes[pos]);
         }
 
         if (i == 1) {
             for (i = pos; i < L->ult; i++) {
-                strcpy(L->beneficiarios[i].dni, L->beneficiarios[i + 1].dni);
-                strcpy(L->beneficiarios[i].nombre, L->beneficiarios[i + 1].nombre);
-                strcpy(L->beneficiarios[i].telefono, L->beneficiarios[i + 1].telefono);
-                strcpy(L->beneficiarios[i].grupo, L->beneficiarios[i + 1].grupo);
-                L->beneficiarios[i].anio = L->beneficiarios[i + 1].anio;
-                L->beneficiarios[i].importe = L->beneficiarios[i + 1].importe;
+                strcpy(L->clientes[i].dni, L->clientes[i + 1].dni);
+                strcpy(L->clientes[i].nombre, L->clientes[i + 1].nombre);
+                strcpy(L->clientes[i].telefono, L->clientes[i + 1].telefono);
+                strcpy(L->clientes[i].prestamo, L->clientes[i + 1].prestamo);
+                strcpy(L->clientes[i].fecha, L->clientes[i + 1].fecha);
+                L->clientes[i].monto = L->clientes[i + 1].monto;
+                L->clientes[i].tazaInteres = L->clientes[i + 1].tazaInteres;
                 costo++;
             }
             L->ult--;
-            *exito=1;
         }
         else
-            *exito=-1;
+            *exito=2;
     }
     return costo;
 }
 
 
-Beneficiario EvocarLsobb(lista *L, char dni[], int *exito, int *costo) {
+Cliente EvocarLsobb(lista *L, char dni[], int *exito, int *costo) {
     int pos;
     *costo = 0;
     pos = LocalizarLsobb(L, dni, exito, costo);
     if (*exito==1)
-        return L->beneficiarios[pos];
+        return L->clientes[pos];
 }
 
 
